@@ -5,7 +5,7 @@
 
     ```bash
     git clone https://github.com/hiren-ghodasara/mongodb-export-import.git
-    cd mongo-sync
+    cd mongodb-export-import
     ```
 
 - Edit `config.yml` and insert your configuration details
@@ -26,8 +26,8 @@
 - Use the script like this:
 	
 	```bash
-	./mongo-sync push [options]		# Push DB to Remote
-	./mongo-sync pull [options]		# Pull DB to Local
+	./mongodb-export-import push [options]		# Push DB to Remote
+	./mongodb-export-import pull [options]		# Pull DB to Local
 	```
 - Options
 
