@@ -176,22 +176,19 @@ function pull {
         remote_host_port=$TUNNEL_PORT
     fi
 
-    echo "Dumping Remote DB to $TMPDIR... "
-    echo $remote_uri
+    echo "Dumping Remote DB to $TMPDIR... "    
     mongodump \
         --uri "$remote_uri"/"$remote_db" \
         -o "$TMPDIR"/"PULL" > /dev/null
     success_msg
 
     echo "Backup Local DB to $TMPDIR... "
-    echo $local_uri
     mongodump \
         --uri "$local_uri"/"$local_db" \
         -o "$TMPDIR"/"PULL" > /dev/null
     success_msg
 
     echo "Overwriting Local DB with Dump... "
-    echo "$TMPDIR"/PULL"$remote_db"
     mongorestore \
         --uri "$local_url" \
         --db "$local_db" \
@@ -221,19 +218,23 @@ function push {
     fi
 
     echo "Dumping Local DB to $TMPDIR... "
+     mongodump \
+        --uri "$local_uri"/"$local_db" \
+        -o "$TMPDIR"/"PUSH" > /dev/null
+    success_msg
+
+    echo "Backup Remote DB to $TMPDIR... "    
     mongodump \
-        --port "$local_host_port" \
-        -d "$local_db" \
-        $LOCAL_CREDENTIALS \
-        -o "$TMPDIR" > /dev/null
+        --uri "$remote_uri"/"$remote_db" \
+        -o "$TMPDIR"/"PUSH" > /dev/null
     success_msg
 
     echo "Overwriting Remote DB with Dump... "
     mongorestore \
-        -h "$remote_host_url":"$remote_host_port" \
-        -d "$remote_db" \
-        $REMOTE_CREDENTIALS \
-        "$TMPDIR"/"$local_db" --drop > /dev/null
+        --uri "$remote_uri" \
+        --db "$remote_db" \
+        --nsInclude '*' \
+        --drop "$TMPDIR"/PUSH/"$local_db"
     success_msg
 
     if [ "$tunnel_on" == true ] ; then
