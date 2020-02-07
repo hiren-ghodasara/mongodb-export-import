@@ -35,6 +35,16 @@
 	-y  # Skip confirmation
 	--config alternate-config-file.yml
 	```
+- Automatic backups your database with date and time
+
+	```
+	1. PULL
+		- ${your root dir}/backup_dbs/2020_02_07/04_51_PM/PULL/{your old db(old target local db)}
+		- ${your root dir}/backup_dbs/2020_02_07/04_51_PM/PULL/{your new db(old source remote db)}
+	2. PUSH
+		- ${your root dir}/backup_dbs/2020_02_07/04_51_PM/PUSH/{your old db(old target remote db)}
+		- ${your root dir}/backup_dbs/2020_02_07/04_51_PM/PUSH/{your new db(old source local db)}
+	```
 ## License
 
 Copyright (c) 2015 Hiren Ghodasara
