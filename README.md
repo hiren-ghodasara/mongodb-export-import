@@ -10,20 +10,18 @@
 
 - Edit `config.yml` and insert your configuration details
 
-Now edit the newly created `config/mongo_sync.yml`, putting in details of your remote and local DBs:
+	```yaml
+	local:
+	uri: "mongodb://localhost:27017"
+	db: "xyz"
 
-```yaml
-local:
-  uri: "mongodb://localhost:27017"
-  db: "xyz"
-
-remote:
-  uri: "mongodb://localhost:27017"
-  db: "abc"
-# For Heroku MongoDB URLs, here's the legend:
-# mongodb://username:password@hosturl.com:port/db_name
-# All fields are required
-```
+	remote:
+	uri: "mongodb://localhost:27017"
+	db: "abc"
+	# For Heroku MongoDB URLs, here's the legend:
+	# mongodb://username:password@hosturl.com:port/db_name
+	# All fields are required
+	```
 
 - Use the script like this:
 	
