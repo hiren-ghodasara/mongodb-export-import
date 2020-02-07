@@ -1,23 +1,29 @@
-[mongo-sync](https://sheharyar.me/blog/sync-mongodb-local-and-production-heroku/)
-=================================================================================
-
-> _Sync Remote and Local MongoDB Databases in Bash. Works with Heroku too!_
-
-For all the Rubyists out there, I've converted this in to a [Ruby Gem](https://github.com/sheharyarn/mongo-sync-ruby) as well.
-
-![mongo-sync demo gif](http://i.imgur.com/hg6hwLk.gif)
-
+# mongodb-export-import
 
 ## Usage
-
 - Download / Clone the script
 
     ```bash
-    git clone https://github.com/sheharyarn/mongo-sync.git
+    git clone https://github.com/hiren-ghodasara/mongodb-export-import.git
     cd mongo-sync
     ```
 
 - Edit `config.yml` and insert your configuration details
+
+Now edit the newly created `config/mongo_sync.yml`, putting in details of your remote and local DBs:
+
+```yaml
+local:
+  uri: "mongodb://localhost:27017"
+  db: "xyz"
+
+remote:
+  uri: "mongodb://localhost:27017"
+  db: "abc"
+# For Heroku MongoDB URLs, here's the legend:
+# mongodb://username:password@hosturl.com:port/db_name
+# All fields are required
+```
 
 - Use the script like this:
 	
@@ -31,33 +37,9 @@ For all the Rubyists out there, I've converted this in to a [Ruby Gem](https://g
 	-y  # Skip confirmation
 	--config alternate-config-file.yml
 	```
-
-## Notes
-
- - `mongo-sync` requires `mongodump` and `mongorestore` binaries to be installed in your system. If you have [`mongodb`](http://docs.mongodb.org/manual/tutorial/#getting-started) installed, then you probably already have them
- - Pushing/Pulling ***overwrites*** the Target DB
- - It's a good idea to keep your `config.yml` in `.gitignore` if you're using it inside some other project
-
-
-## TODO
-
- - Add a `--no-overwrite` flag+feature that doesn't drop the target db before restoring it, and *actually* tries to sync it
- - Add a `backup` command and an `--auto-backup` feature
- - Add more options for Local DB in `config.yml`
-
-
-## Contributing
-
-1. [Fork it](https://github.com/sheharyarn/mongo-sync/fork)
-2. Create your feature/fix branch (`git checkout -b feature/my-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin feature/my-feature`)
-5. Create a new Pull Request
-
-
 ## License
 
-Copyright (c) 2015 Sheharyar Naseer
+Copyright (c) 2015 Hiren Ghodasara
 
 MIT License
 
@@ -80,4 +62,3 @@ LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
 OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-# mongodb-export-import
